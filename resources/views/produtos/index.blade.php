@@ -21,10 +21,11 @@
                 @foreach ($produtos as $produto)
                     <tr>
                         <th scope="col">
-                            <a href="{{route('editar-produto')}}?codpro={{ $produto->codpro }}"><a href="{{route('editar-produto')}}?codpro={{ $produto->codpro }}"> {{ $produto->codpro }}</a></a>
+                        {{ $produto->codpro }}
+                            
                         </th>
                         <th scope="col">
-                            {{ $produto->nompro }}
+                        <a href="{{route('editar-produto')}}?codpro={{ $produto->codpro }}"><a href="{{route('editar-produto')}}?codpro={{ $produto->codpro }}" style="text-decoration: none,"> {{ $produto->nompro }}</a>
                         <th scope="col">
                             {{ $produto->estpro }}
                         </th>   
