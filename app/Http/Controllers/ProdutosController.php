@@ -19,14 +19,31 @@ class ProdutosController extends Controller
     }
 
     public function add() {
-        return view('produtos.add');
+        $produto = new Produto();
+        return view('produtos.add', compact('produto'));
     }
 
     public function store(Request $request) {
+
         $produto = new Produto();
+
+        if($request->get('codpro') == null) {
+            $produto->nompro = $request->get("nompro");
+            $produto->estpro = $request->get("estpro");
+            $produto->save();
+
+            return redirect()->route('lista-produtos');
+        } else {
+            $produto = Produto::find($request->get('codpro'));
+            $produto->nompro = $request->get("nompro");
+            $produto->estpro = $request->get("estpro");
+            $produto->save();
+        }
+
         $produto->nompro = $request->get("nompro");
         $produto->estpro = $request->get("estpro");
         $produto->save();
+
         return redirect()->route('lista-produtos');
     }
 
@@ -36,9 +53,9 @@ class ProdutosController extends Controller
         return redirect()->route('lista-produtos');
     }
 
-    public function find(Request $request){
-        $nome = $request->get('nome');
-        $produtos = Produto::where('nompro','LIKE','%'.$request->get("nome").'%')->get();
-        return view("produtos.search", compact('produtos', 'nome'));
+    public function edit(Request $request) {
+        $produto = Produto::find($request->get('codpro'));
+        return view('produtos.add', compact('produto'));
     }
+
 }

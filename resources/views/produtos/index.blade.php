@@ -21,20 +21,22 @@
                 @foreach ($produtos as $produto)
                     <tr>
                         <th scope="col">
-                            {{ $produto->codpro }}
+                            <a href="{{route('editar-produto')}}?codpro={{ $produto->codpro }}"><a href="{{route('editar-produto')}}?codpro={{ $produto->codpro }}"> {{ $produto->codpro }}</a></a>
                         </th>
                         <th scope="col">
                             {{ $produto->nompro }}
-                        </th>
                         <th scope="col">
                             {{ $produto->estpro }}
-                        </th>
+                        </th>   
                         <th scole="col">
-                            <form method="post" 
-                            action="{{ route('elimar-produto') }}">
+                            <form method="post"  action="{{ route('elimar-produto') }}">
                             @csrf
                             <input type="hidden" name="codpro" value="{{ $produto->codpro }}"/>
-                            <button class="btn btn-primary">Deletar</button>
+                            <button class="btn btn-danger">Deletar</button>
+                            </form>
+                            <form method="post" action="{{ route('elimar-produto') }}">
+                            @csrf
+                            <input type="hidden" name="codpro" value="{{ $produto->codpro }}"/>
                             </form>
                         </th>
                     </tr>
